@@ -7,8 +7,9 @@
 
 String connectToWiFi()
 {
-  const char *ssid = "Abrar";
-  const char *password = "null_byte0x00";
+  const char *ssid = "NAF Tech_WiFi";
+  const char *password = "N@f Tech";
+  // const char *password = "null_byte0x00";
   // Connect to WiFi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
@@ -109,10 +110,14 @@ Header::Header(String header)
 // Route Handler function
 extern LED led;
 extern Fan fan;
-extern Button rain_sensor;
+
+extern ButtonInverted rain_sensor;
+
 extern Button pir_sensor;
 extern Button ldr_sensor;
+
 extern DHTSensor dht;
+
 extern ServoMotor door;
 extern ServoMotor window;
 
@@ -317,39 +322,9 @@ void handleRequest(WiFiClient client, String uri)
   {
     StaticJsonDocument<200> jsonDocument;
 
-    // Rain sensor
     jsonDocument["rainState"] = rain_sensor.getState();
-    if (rain_sensor.getState() == "on" && window.getAutomatedState() == "on")
-    {
-      window.setState("closed");
-    }
-    else if (rain_sensor.getState() == "off" && window.getAutomatedState() == "on")
-    {
-      window.setState("open");
-    }
-
-    // PIR sensor
     jsonDocument["pirState"] = pir_sensor.getState();
-    if (pir_sensor.getState() == "on" && door.getAutomatedState() == "on")
-    {
-      door.setState("open");
-    }
-    else if (pir_sensor.getState() == "off" && door.getAutomatedState() == "on")
-    {
-      door.setState("closed");
-    }
-
-    // LDR sensor
     jsonDocument["ldrState"] = ldr_sensor.getState();
-    if (ldr_sensor.getState() == "on" && led.getAutomatedState() == "on")
-    {
-      led.setState("on");
-    }
-    else if (ldr_sensor.getState() == "off" && led.getAutomatedState() == "on")
-    {
-      led.setState("off");
-    }
-
     jsonDocument["tempState"] = dht.getTemperature();
     jsonDocument["humidState"] = dht.getHumidity();
 

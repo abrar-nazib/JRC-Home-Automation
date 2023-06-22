@@ -37,12 +37,19 @@ public:
 
 class Button
 {
-private:
+protected:
     int pin;
     bool state;
 
 public:
     Button(int pin);
+    String getState();
+};
+
+class ButtonInverted : public Button
+{
+public:
+    ButtonInverted(int pin);
     String getState();
 };
 
@@ -82,5 +89,7 @@ public:
     String getAutomatedState();
     void setAutomatedState(String state);
 };
+
+void automate();
 
 #endif // _SMARTHOME

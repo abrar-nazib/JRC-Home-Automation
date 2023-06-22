@@ -151,7 +151,7 @@ const char *html = R"(
                     document.getElementById('rainState').textContent = data.rainState == "on" ? "Raining" : "Not Raining";
 
                     // LDR state
-                    document.getElementById('ldrState').textContent = data.ldrState == "on" ? "Daylight" : "Night";
+                    document.getElementById('ldrState').textContent = data.ldrState == "off" ? "Daylight" : "Night";
 
                     document.getElementById('rainImg').src = data.rainState == "on" ? "https://cdn-icons-png.flaticon.com/512/3217/3217120.png" : "https://cdn-icons-png.flaticon.com/512/2392/2392508.png";
                     document.getElementById('tempState').textContent = `${data.tempState}° Celcius`;

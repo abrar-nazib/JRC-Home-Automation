@@ -68,6 +68,7 @@ Button::Button(int pin)
 {
     this->pin = pin;
     pinMode(pin, INPUT_PULLDOWN);
+
     this->state = false;
 }
 
@@ -76,6 +77,16 @@ String Button::getState()
 {
     state = digitalRead(this->pin);
     return this->state ? "on" : "off";
+}
+
+ButtonInverted::ButtonInverted(int pin) : Button(pin)
+{
+}
+
+String ButtonInverted::getState()
+{
+    state = digitalRead(this->pin);
+    return this->state ? "off" : "on";
 }
 
 // DHT22 class constructor
@@ -174,5 +185,59 @@ void ServoMotor::setAutomatedState(String state)
     else
     {
         this->automatedState = false;
+    }
+}
+
+extern LED led;
+extern Fan fan;
+
+extern ButtonInverted rain_sensor;
+
+extern Button pir_sensor;
+extern Button ldr_sensor;
+
+extern DHTSensor dht;
+
+extern ServoMotor door;
+extern ServoMotor window;
+
+// Automate function
+void automate()
+{
+    // Handle the automated state of the LED Depending on ldr_sensor
+    if (led.getAutomatedState() == "on")
+    {
+        if (ldr_sensor.getState() == "on")
+        {
+            led.setState("on");
+        }
+        else
+        {
+            led.setState("off");
+        }
+    }
+    // Handle the automated state of window depending on rain_sensor
+    if (window.getAutomatedState() == "on")
+    {
+        if (rain_sensor.getState() == "on")
+        {
+            window.setState("closed");
+        }
+        else
+        {
+            window.setState("open");
+        }
+    }
+    // Handle the automated state of Door depending on pir_sensor
+    if (door.getAutomatedState() == "on")
+    {
+        if (pir_sensor.getState() == "on")
+        {
+            door.setState("open");
+        }
+        else
+        {
+            door.setState("closed");
+        }
     }
 }

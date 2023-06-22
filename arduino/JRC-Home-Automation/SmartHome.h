@@ -46,6 +46,12 @@ public:
     String getState();
 };
 
+class RainSensor : public Button
+{
+public:
+    RainSensor(int pin);
+};
+
 // DHT22 sensor
 class DHTSensor
 {
