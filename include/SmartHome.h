@@ -58,11 +58,14 @@ class DHTSensor
 {
 private:
     int pin;
+    float threshold = 30.00;
     DHT_Unified *dht;
 
 public:
     DHTSensor(int pin);
     String getTemperature();
+    void setTemperatureThreshold(float Threshold);
+    float getTemperatureThreshold();
     String getHumidity();
 };
 

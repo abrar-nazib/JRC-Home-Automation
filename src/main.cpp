@@ -13,7 +13,7 @@
 #define DHTPIN 02
 #define DOOR_PIN 16
 #define DOOR_OPEN 30
-#define DOOR_CLOSE 145
+#define DOOR_CLOSE 135
 #define WINDOW_PIN 15
 #define WINDOW_OPEN 60
 #define WINDOW_CLOSE 165
@@ -21,6 +21,7 @@
 // WiFi server parameters
 WiFiServer server(80); // web server in port 80
 String local_ip;
+bool wifi_flag = 0;
 
 // Initialize the LED
 LED led = LED(LED_PIN);
@@ -34,14 +35,15 @@ DHTSensor dht = DHTSensor(DHTPIN);
 ServoMotor door = ServoMotor(DOOR_PIN, DOOR_OPEN, DOOR_CLOSE);
 ServoMotor window = ServoMotor(WINDOW_PIN, WINDOW_OPEN, WINDOW_CLOSE);
 
-LiquidCrystal_I2C lcd(0x3F, 16, 2); // set the LCD address to 0x3F for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27, 16, 2); // set the LCD address to 0x3F for a 16 chars and 2 line display
 
 void setup()
 {
   Serial.begin(115200);
 
   // Connect to wifi
-  local_ip = connectToWiFi();
+  // local_ip = connectToWiFi();
+  connectToWiFi();
 
   // Show the local IP in Liquid Crystal Display
   lcd.init();
@@ -51,9 +53,8 @@ void setup()
   // Print a message on both lines of the LCD.
   lcd.setCursor(0, 0); // Set cursor to character 2 on line 0
   lcd.print("JRC Smart Home");
-
   lcd.setCursor(0, 1); // Move cursor to character 2 on line 1
-  lcd.print(local_ip);
+  lcd.print("    No WiFi     ");
 
   // Start the server
   server.begin();
@@ -78,4 +79,19 @@ void loop()
   }
   // Check for sensors for automation of the LED, Fan, Door and Window
   automate();
+
+  if (WiFi.status() != WL_CONNECTED && wifi_flag)
+  {
+    wifi_flag = 0;
+    lcd.setCursor(0, 1); // Move cursor to character 2 on line 1
+    lcd.print("    No WiFi     ");
+  }
+  else if (WiFi.status() == WL_CONNECTED && !wifi_flag)
+  {
+    wifi_flag = 1;
+    lcd.setCursor(0, 1); // Move cursor to character 2 on line 1
+    lcd.print(WiFi.localIP());
+    Serial.println("IP" + WiFi.localIP());
+    server.begin();
+  }
 }

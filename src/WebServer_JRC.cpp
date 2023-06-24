@@ -7,19 +7,17 @@
 
 String connectToWiFi()
 {
+
+  // const char *ssid = "JRC Board";
+  // const char *password = "robotics";
   const char *ssid = "NAF Tech_WiFi";
   const char *password = "N@f Tech";
   // const char *password = "null_byte0x00";
   // Connect to WiFi
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(1000);
-    Serial.println("Connecting to WiFi..");
-  }
-  Serial.println("Connected to the WiFi network");
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
+  // Serial.println("Connected to the WiFi network");
+  // Serial.print("IP address: ");
+  // Serial.println(WiFi.localIP());
   return WiFi.localIP().toString();
 }
 

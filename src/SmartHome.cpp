@@ -117,6 +117,17 @@ String DHTSensor::getHumidity()
     return hum;
 }
 
+// set the threshold
+void DHTSensor::setTemperatureThreshold(float threshold)
+{
+    this->threshold = threshold;
+}
+
+float DHTSensor::getTemperatureThreshold()
+{
+    return this->threshold;
+}
+
 ServoMotor::ServoMotor(int pin, int openAngle, int closedAngle)
 {
     this->pin = pin;
@@ -216,6 +227,20 @@ void automate()
             led.setState("off");
         }
     }
+
+    // Handle the automated state of the Fan Depending on temperature
+    if (fan.getAutomatedState() == "on")
+    {
+        if (dht.getTemperature().toFloat() > dht.getTemperatureThreshold())
+        {
+            fan.setState("on");
+        }
+        else
+        {
+            fan.setState("off");
+        }
+    }
+
     // Handle the automated state of window depending on rain_sensor
     if (window.getAutomatedState() == "on")
     {
