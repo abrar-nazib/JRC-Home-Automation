@@ -92,6 +92,7 @@ void loop()
     lcd.setCursor(0, 1); // Move cursor to character 2 on line 1
     lcd.print(WiFi.localIP());
     Serial.println("IP" + WiFi.localIP());
+    Serial.println("IP" + WiFi.localIP());
     server.begin();
   }
 }
