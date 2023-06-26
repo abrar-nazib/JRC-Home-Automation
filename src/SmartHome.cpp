@@ -120,12 +120,22 @@ String DHTSensor::getHumidity()
 // set the threshold
 void DHTSensor::setTemperatureThreshold(float threshold)
 {
-    this->threshold = threshold;
+    this->temperatureThreshold = threshold;
 }
 
 float DHTSensor::getTemperatureThreshold()
 {
-    return this->threshold;
+    return this->temperatureThreshold;
+}
+
+void DHTSensor::setHumidityThreshold(float threshold)
+{
+    this->humidityThreshold = threshold;
+}
+
+float DHTSensor::getHumidityThreshold()
+{
+    return this->humidityThreshold;
 }
 
 ServoMotor::ServoMotor(int pin, int openAngle, int closedAngle)
@@ -215,18 +225,6 @@ extern ServoMotor window;
 // Automate function
 void automate()
 {
-    // Handle the automated state of the LED Depending on ldr_sensor
-    if (led.getAutomatedState() == "on")
-    {
-        if (ldr_sensor.getState() == "on")
-        {
-            led.setState("on");
-        }
-        else
-        {
-            led.setState("off");
-        }
-    }
 
     // Handle the automated state of the Fan Depending on temperature
     if (fan.getAutomatedState() == "on")
@@ -241,22 +239,10 @@ void automate()
         }
     }
 
-    // Handle the automated state of window depending on rain_sensor
-    if (window.getAutomatedState() == "on")
-    {
-        if (rain_sensor.getState() == "on")
-        {
-            window.setState("closed");
-        }
-        else
-        {
-            window.setState("open");
-        }
-    }
     // Handle the automated state of Door depending on pir_sensor
     if (door.getAutomatedState() == "on")
     {
-        if (pir_sensor.getState() == "on")
+        if (dht.getHumidity().toFloat() > dht.getHumidityThreshold())
         {
             door.setState("open");
         }

@@ -8,16 +8,24 @@
 String connectToWiFi()
 {
 
-  // const char *ssid = "JRC Board";
-  // const char *password = "robotics";
-  const char *ssid = "NAF Tech_WiFi";
-  const char *password = "N@f Tech";
+  const char *ssid = "JRC Board";
+  const char *password = "robotics";
+  // const char *ssid = "NAF Tech_WiFi";
+  // const char *password = "N@f Tech";
   // const char *password = "null_byte0x00";
   // Connect to WiFi
   WiFi.begin(ssid, password);
-  // Serial.println("Connected to the WiFi network");
-  // Serial.print("IP address: ");
-  // Serial.println(WiFi.localIP());
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nConnected to the WiFi network");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
   return WiFi.localIP().toString();
 }
 
@@ -106,18 +114,18 @@ Header::Header(String header)
 }
 
 // Route Handler function
-extern LED led;
+// extern LED led;
 extern Fan fan;
 
-extern ButtonInverted rain_sensor;
+// extern ButtonInverted rain_sensor;
 
-extern Button pir_sensor;
-extern Button ldr_sensor;
+// extern Button pir_sensor;
+// extern Button ldr_sensor;
 
 extern DHTSensor dht;
 
 extern ServoMotor door;
-extern ServoMotor window;
+// extern ServoMotor window;
 
 void handleRequest(WiFiClient client, String uri)
 {
@@ -125,48 +133,48 @@ void handleRequest(WiFiClient client, String uri)
   {
     sendResponse(client);
   }
-  else if (uri == "/api/light/toggle")
-  {
-    // get the state of the LED1
-    String state = led.getState();
-    // toggle the state
-    if (state == "off")
-    {
-      led.setState("on");
-    }
-    else
-    {
-      led.setState("off");
-    }
-    // send the response
-    sendJSONResponse(client, led.getState());
-  }
-  else if (uri == "/api/light/get-state")
-  {
-    sendJSONResponse(client, led.getState());
-  }
-  // api/light/get-automate-state
-  else if (uri == "/api/light/get-automate-state")
-  {
-    sendJSONResponse(client, led.getAutomatedState());
-  }
-  // api/light/get-automate-state
-  else if (uri == "/api/light/toggle-automate")
-  {
-    // get the state of the LED1
-    String state = led.getAutomatedState();
-    // toggle the state
-    if (state == "off")
-    {
-      led.setAutomatedState("on");
-    }
-    else
-    {
-      led.setAutomatedState("off");
-    }
-    // send the response
-    sendJSONResponse(client, led.getAutomatedState());
-  }
+  // else if (uri == "/api/light/toggle")
+  // {
+  //   // get the state of the LED1
+  //   String state = led.getState();
+  //   // toggle the state
+  //   if (state == "off")
+  //   {
+  //     led.setState("on");
+  //   }
+  //   else
+  //   {
+  //     led.setState("off");
+  //   }
+  //   // send the response
+  //   sendJSONResponse(client, led.getState());
+  // }
+  // else if (uri == "/api/light/get-state")
+  // {
+  //   sendJSONResponse(client, led.getState());
+  // }
+  // // api/light/get-automate-state
+  // else if (uri == "/api/light/get-automate-state")
+  // {
+  //   sendJSONResponse(client, led.getAutomatedState());
+  // }
+  // // api/light/get-automate-state
+  // else if (uri == "/api/light/toggle-automate")
+  // {
+  //   // get the state of the LED1
+  //   String state = led.getAutomatedState();
+  //   // toggle the state
+  //   if (state == "off")
+  //   {
+  //     led.setAutomatedState("on");
+  //   }
+  //   else
+  //   {
+  //     led.setAutomatedState("off");
+  //   }
+  //   // send the response
+  //   sendJSONResponse(client, led.getAutomatedState());
+  // }
 
   // API Endpoint for fan
   else if (uri == "/api/fan/toggle")
@@ -268,61 +276,61 @@ void handleRequest(WiFiClient client, String uri)
 
   // Handle window APIs
   // api/window/toggle
-  else if (uri == "/api/window/toggle")
-  {
-    // get the state of the window
-    String state = window.getState();
-    // toggle the state
-    if (state == "closed")
-    {
-      window.setState("open");
-    }
-    else
-    {
-      window.setState("closed");
-    }
-    // send the response
-    sendJSONResponse(client, window.getState());
-  }
+  // else if (uri == "/api/window/toggle")
+  // {
+  //   // get the state of the window
+  //   String state = window.getState();
+  //   // toggle the state
+  //   if (state == "closed")
+  //   {
+  //     window.setState("open");
+  //   }
+  //   else
+  //   {
+  //     window.setState("closed");
+  //   }
+  //   // send the response
+  //   sendJSONResponse(client, window.getState());
+  // }
 
-  // Get Automate State
-  else if (uri == "/api/window/get-automate-state")
-  {
-    sendJSONResponse(client, window.getAutomatedState());
-  }
+  // // Get Automate State
+  // else if (uri == "/api/window/get-automate-state")
+  // {
+  //   sendJSONResponse(client, window.getAutomatedState());
+  // }
 
-  // Window toggle automate
-  else if (uri == "/api/window/toggle-automate")
-  {
-    // get the state of the window
-    String state = window.getAutomatedState();
-    // toggle the state
-    if (state == "off")
-    {
-      window.setAutomatedState("on");
-    }
-    else
-    {
-      window.setAutomatedState("off");
-    }
-    // send the response
-    sendJSONResponse(client, window.getAutomatedState());
-  }
+  // // Window toggle automate
+  // else if (uri == "/api/window/toggle-automate")
+  // {
+  //   // get the state of the window
+  //   String state = window.getAutomatedState();
+  //   // toggle the state
+  //   if (state == "off")
+  //   {
+  //     window.setAutomatedState("on");
+  //   }
+  //   else
+  //   {
+  //     window.setAutomatedState("off");
+  //   }
+  //   // send the response
+  //   sendJSONResponse(client, window.getAutomatedState());
+  // }
 
-  // api/window/get-state
-  else if (uri == "/api/window/get-state")
-  {
-    sendJSONResponse(client, window.getState());
-  }
+  // // api/window/get-state
+  // else if (uri == "/api/window/get-state")
+  // {
+  //   sendJSONResponse(client, window.getState());
+  // }
 
   // handle /api/sensors
   else if (uri == "/api/sensors")
   {
     StaticJsonDocument<200> jsonDocument;
 
-    jsonDocument["rainState"] = rain_sensor.getState();
-    jsonDocument["pirState"] = pir_sensor.getState();
-    jsonDocument["ldrState"] = ldr_sensor.getState();
+    // jsonDocument["rainState"] = rain_sensor.getState();
+    // jsonDocument["pirState"] = pir_sensor.getState();
+    // jsonDocument["ldrState"] = ldr_sensor.getState();
     jsonDocument["tempState"] = dht.getTemperature();
     jsonDocument["humidState"] = dht.getHumidity();
 
