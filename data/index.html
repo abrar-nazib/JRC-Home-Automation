@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JRC Smart Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Styles for floating help button */
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        /* Styles for footer */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Styles for real-time date and time */
+        .date-time {
+            /*position: absolute;*/
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="text-center mt-4">
+            <h1>JRC Smart Home</h1>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXGa0ts752Ug6-MwlJ0Jn8NqFsfe4U8MFy8S1xrpvtbA&s"
+                alt="JRC Logo" width="100">
+            <div class="date-time" id="datetime"></div>
+
+        </header>
+
+        <div class="row mt-5">
+            <div class="col-md-6 my-2" id="help">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Control Panel</h5>
+                        <div class="row">
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Light</h6>
+                                        <p class="card-text">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/4021/4021717.png"
+                                                alt="Light Logo" width="50">
+                                        </p>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="lightSwitch">
+                                            <label class="custom-control-label" for="lightSwitch"
+                                                id="lightSwitchLabel">State: OFF</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="lightAutomationSwitch">
+                                            <label class="custom-control-label" for="lightAutomationSwitch"
+                                                id="lightAutomationSwitchLabel">Automatic</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Fan</h6>
+                                        <p class="card-text">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/2337/2337999.png"
+                                                alt="Light Logo" width="50">
+                                        </p>
+                                        <!-- <button class="btn btn-primary" id="fanBtn">Turn On</button> -->
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="fanSwitch">
+                                            <label class="custom-control-label" for="fanSwitch"
+                                                id="fanSwitchLabel">State: OFF</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="fanAutomationSwitch">
+                                            <label class="custom-control-label" for="fanAutomationSwitch"
+                                                id="fanAutomationSwitchLabel">Automatic</label>
+                                        </div>
+
+                                        <!-- <button class="btn btn-success" id="fanAutomateBtn">Automatic</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Door</h6>
+                                        <p class="card-text">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/279/279930.png"
+                                                alt="Light Logo" width="50">
+                                        </p>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="doorSwitch">
+                                            <label class="custom-control-label" for="doorSwitch"
+                                                id="doorSwitchLabel">State: OFF</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="doorAutomationSwitch">
+                                            <label class="custom-control-label" for="doorAutomationSwitch"
+                                                id="doorAutomationSwitchLabel">Automatic</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Window</h6>
+                                        <p class="card-text">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/148/148261.png"
+                                                alt="Light Logo" width="50">
+                                        </p>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="windowSwitch">
+                                            <label class="custom-control-label" for="windowSwitch"
+                                                id="windowSwitchLabel">State: OFF</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="windowAutomationSwitch">
+                                            <label class="custom-control-label" for="windowAutomationSwitch"
+                                                id="windowAutomationSwitchLabel">Automatic</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 my-2" id="help">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Sensor Panel</h5>
+                        <div class="row">
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Temperature</h6>
+                                        <p class="card-text"><img
+                                                src="https://cdn-icons-png.flaticon.com/512/136/136609.png" alt=""
+                                                id="tempImg" width="50"></p>
+                                        <p class="card-text" id="tempState">28.34 °C</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Humidity</h6>
+
+                                        <p class="card-text"><img
+                                                src="https://cdn-icons-png.flaticon.com/512/1582/1582886.png" alt=""
+                                                id="humidImg" width="50"></p>
+                                        <p class="card-text" id="humidState"> 57.22%</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">People Present</h6>
+                                        <p class="card-text"><img
+                                                src="https://cdn-icons-png.flaticon.com/512/2947/2947640.png" alt=""
+                                                id="pirImg" width="50"></p>
+                                        <p class="card-text" id="pirState">No People Detected</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Daylight Status</h6>
+                                        <p class="card-text"><img
+                                                src="https://cdn-icons-png.flaticon.com/512/1792/1792806.png" alt=""
+                                                id="ldrImg" width="50"></p>
+                                        <p class="card-text" id="ldrState">Light Intensity: High</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Rain Sensor Status</h6>
+                                        <p class="card-text"><img
+                                                src="https://cdn-icons-png.flaticon.com/512/2392/2392508.png" alt=""
+                                                id="rainImg" width="50"></p>
+                                        <p class="card-text" id="rainState">No Rain</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 my-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Power Usage</h6>
+                                        <p class="card-text"><img
+                                                src="https://cdn-icons-png.flaticon.com/512/3498/3498566.png" alt=""
+                                                id="rainImg" width="50"></p>
+                                        <p class="card-text" id="powerState">0.0 Units</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Rest of your HTML content -->
+
+        <!-- Floating Help Button -->
+        <a href="https://github.com/" class="btn btn-primary help-button">Help</a>
+
+        <!-- Footer -->
+        <footer>
+            <p>Contact us: <a href="https://frontech.global">FronTech Limited</a></p>
+            <p>Documentation: <a href="https://github.com">JRC Board Smart Home Library</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        window.onload = function () {
+            updateOutputDevices();
+            updateSensorValues();
+            updateDateTime();
+        };
+        function updateDateTime() {
+            var datetimeElement = document.getElementById('datetime');
+
+            function pad(num) {
+                return num < 10 ? "0" + num : num;
+            }
+
+            function update() {
+                var now = new Date();
+                var date = now.toLocaleDateString('en-US');
+                var hours = pad(now.getHours() % 12 || 12); // Get the hours in 12-hour format
+                var time = hours + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+                var ampm = now.getHours() >= 12 ? "PM" : "AM"; // Determine if it's AM or PM
+                var dateTimeString = "Date: " + date + " Time: " + time + " " + ampm;
+                datetimeElement.textContent = dateTimeString;
+            }
+
+            setInterval(update, 1000); // Update every second
+        }
+
+    </script>
+</body>
+
+</html>
