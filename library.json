@@ -6,6 +6,21 @@
       "owner": "bblanchon",
       "name": "ArduinoJson",
       "version": "^6.21.2"
+    },
+    {
+      "owner": "adafruit",
+      "name": "DHT sensor library",
+      "version": "^1.4.4"
+    },
+    {
+      "owner": "madhephaestus",
+      "name": "ESP32Servo",
+      "version": "^0.13.0"
+    },
+    {
+      "owner": "marcoschwartz",
+      "name": "LiquidCrystal_I2C",
+      "version": "^1.1.4"
     }
   ]
 }
