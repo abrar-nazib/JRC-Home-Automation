@@ -3,8 +3,9 @@
   "version": "0.0.0+20230718171328",
   "dependencies": [
     {
-      "name": "ESPAsyncWebServer",
-      "url": "https://github.com/me-no-dev/ESPAsyncWebServer"
+      "owner": "bblanchon",
+      "name": "ArduinoJson",
+      "version": "^6.21.2"
     }
   ]
 }
