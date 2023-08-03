@@ -1,6 +1,6 @@
 {
-  "name": "JRC-Home-Automation",
-  "version": "0.0.0+20230718171328",
+  "name": "JRC-Board-Home-Automation",
+  "version": "0.0.1b",
   "dependencies": [
     {
       "owner": "bblanchon",
