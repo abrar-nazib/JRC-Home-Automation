@@ -10,11 +10,9 @@
   - <img src="docs/images/arduino_installation.png" width="400">
   - Find the downloaded zip file and click Open to complete the install.
 
-### PlatformIO
+### Library Dependencies
 
-Add the github link of this repository to the lib_deps and Save the file.
-
-```
-lib_deps=
-    https://github.com/JRCBoard/JRC-Board-Smart-Home
-```
+- ArduinoJson
+- DHT Sensor Library
+- ESP32Servo
+- LiquidCrystal_I2C
